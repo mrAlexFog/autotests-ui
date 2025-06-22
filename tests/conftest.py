@@ -38,4 +38,12 @@ def chromium_page_with_state(
         page = context.new_page()
         yield page
 
+@pytest.fixture(scope="function")
+def chromium_page():
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(headless=False, slow_mo=20)
+        context = browser.new_context()
+        page = context.new_page()
+        yield page
+
 
